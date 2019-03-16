@@ -13,7 +13,7 @@ var (
 
 func init() {
 	//这里已经提前连接好了数据库，并且使用video_server数据库！！！
-	dbConn, err = sql.Open("mysql", "root:061365404abc@tcp(localhost:3306)/video_server?charset=utf8")
+	dbConn, err = sql.Open("mysql", "root:061365404@tcp(localhost:3306)/video_server?charset=utf8")
 
 	if err != nil {
 		panic(err.Error())

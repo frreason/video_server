@@ -17,7 +17,7 @@ func ReadVideoDeletionRecord(count int) ([]string, error) {
 
 	rows, err := stmtOut.Query(count)
 	if err != nil {
-		log.Printf("Query VideoDeletionRecord error: %v", err)
+		log.Printf("Query VideoDeletionRecord error: %v \n", err)
 		return ids, err
 	}
 
@@ -42,7 +42,7 @@ func DelVideoDeletionRecord(vid string) error {
 
 	_, err = stmtDel.Exec(vid)
 	if err != nil {
-		log.Printf("Deleting VideoDeletionRecord error: %v", err)
+		log.Printf("Deleting VideoDeletionRecord error: %v \n", err)
 		return err
 	}
 

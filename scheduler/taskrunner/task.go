@@ -14,7 +14,7 @@ func deleteVideo(vid string) error {
 	bn := "frreason-videos"
 	ok := ossops.DeleteObject(ossfn, bn)
 	if !ok {
-		log.Printf("Deleting video error,oss operation failed")
+		log.Printf("Deleting video error,oss operation failed \n")
 		return errors.New("Deleting video error")
 	}
 
@@ -24,7 +24,7 @@ func deleteVideo(vid string) error {
 func VideoClearDispatcher(dc dataChan) error {
 	res, err := dbops.ReadVideoDeletionRecord(3)
 	if err != nil {
-		log.Printf("Video clear dispatcher error: %v", err)
+		log.Printf("Video clear dispatcher error: %v \n", err)
 		return err
 	}
 
