@@ -114,7 +114,7 @@ func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	}
 
 	// Validate the request body
-	uname := p.ByName("user_name") //这一行是什么意思
+	uname := p.ByName("username") //这一行是什么意思
 	log.Printf("Login url name: %s", uname)
 
 	log.Printf("Login body name: %s", ubody.Username)
