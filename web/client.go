@@ -40,6 +40,7 @@ func request(b *ApiBody, w http.ResponseWriter, r *http.Request) {
 		resp, err = httpClient.Do(req)
 		if err != nil {
 			log.Printf("httpClient.Do error: %s\n", err)
+			log.Printf("     ")
 			return
 		}
 		normalResponse(w, resp)

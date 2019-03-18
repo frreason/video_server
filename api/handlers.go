@@ -14,6 +14,7 @@ import (
 )
 
 func CreateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	log.Println("CreateUser handler")
 	res, _ := ioutil.ReadAll(r.Body)
 	ubody := &defs.UserCredential{}
 	if err := json.Unmarshal(res, ubody); err != nil {

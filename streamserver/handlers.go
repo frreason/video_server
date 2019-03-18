@@ -24,7 +24,6 @@ func streamHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 	log.Println("streamHandler!")
 	targetUrl := "http://frreason-videos.oss-cn-shenzhen.aliyuncs.com/videos/" + p.ByName("vid-id")
 	http.Redirect(w, r, targetUrl, 301)
-
 }
 
 // func streamHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
