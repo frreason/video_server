@@ -43,15 +43,15 @@ func homeHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func userHomeHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	cname, err1 := r.Cookie("user_name")
+	cname, err1 := r.Cookie("username")
 	_, err2 := r.Cookie("session")
-	log.Printf("11111")
+
 	if err1 != nil || err2 != nil {
 		http.Redirect(w, r, "/", http.StatusFound)
 		return
 	}
-	log.Printf("22222")
-	fname := r.FormValue("user_name")
+
+	fname := r.FormValue("username")
 	var p *UserPage
 	if len(cname.Value) != 0 {
 		p = &UserPage{Name: cname.Value}

@@ -3,10 +3,12 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"frreason/config"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 )
 
 var httpClient *http.Client
@@ -19,32 +21,34 @@ func request(b *ApiBody, w http.ResponseWriter, r *http.Request) {
 	var resp *http.Response
 	var err error
 
-
+	u, _ := url.Parse(b.Url)
+	u.Host = config.GetLbAddr() + ":" + u.Port()
+	newUrl := u.String()
 	switch b.Method {
 	case http.MethodGet:
-		req, _ := http.NewRequest("GET", b.Url, nil)
+		req, _ := http.NewRequest("GET", newUrl, nil)
 		req.Header = r.Header
 		resp, err = httpClient.Do(req)
 		if err != nil {
-			log.Printf("httpClient.Do error: %v", err)
+			log.Printf("httpClient.Do error: %s \n", err)
 			return
 		}
 		normalResponse(w, resp)
 	case http.MethodPost:
-		req, _ := http.NewRequest("POST", b.Url, bytes.NewBuffer([]byte(b.ReqBody)))
+		req, _ := http.NewRequest("POST", newUrl, bytes.NewBuffer([]byte(b.ReqBody)))
 		req.Header = r.Header
 		resp, err = httpClient.Do(req)
 		if err != nil {
-			log.Printf("httpClient.Do error: %v", err)
+			log.Printf("httpClient.Do error: %s\n", err)
 			return
 		}
 		normalResponse(w, resp)
 	case http.MethodDelete:
-		req, _ := http.NewRequest("POST", b.Url, nil)
+		req, _ := http.NewRequest("DELETE", newUrl, nil)
 		req.Header = r.Header
 		resp, err = httpClient.Do(req)
 		if err != nil {
-			log.Printf("httpClient.Do error: %v", err)
+			log.Printf("httpClient.Do error: %s \n", err)
 			return
 		}
 		normalResponse(w, resp)

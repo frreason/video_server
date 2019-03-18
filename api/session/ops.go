@@ -42,7 +42,7 @@ func GenerateNewSessionId(uname string) string { //最后要返回sessionId
 	ctime := nowInMilli()
 	ttl := ctime + 30*60*1000                            //30min
 	ss := &defs.SimpleSession{Username: uname, TTL: ttl} //这里取地址和不取地址有什么区别
-	sessionMap.Store(uname, ss)                          //写入缓存
+	sessionMap.Store(sid, ss)                          //写入缓存
 	dbops.InsertSession(sid, ttl, uname)                 //写入数据库
 	return sid
 }

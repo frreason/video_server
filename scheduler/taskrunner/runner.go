@@ -7,7 +7,7 @@ type Runner struct {
 	Data       dataChan
 	dataSize   int
 	longLived  bool //决定Runner是否长期存活
-	Dispatcher fn  //fn是函数类型
+	Dispatcher fn   //fn是函数类型
 	Executor   fn
 }
 

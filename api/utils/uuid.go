@@ -44,6 +44,5 @@ func SendDeleteVideoRequest(id string) {
 	_, err := http.Get(url)
 	if err != nil {
 		log.Printf("sending deleting video request error: %s", err)
-		return
 	}
 }

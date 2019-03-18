@@ -132,7 +132,7 @@ func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	}
 
 	id := session.GenerateNewSessionId(ubody.Username)
-	si := &defs.SignedUp{Success: true, SessionId: id}
+	si := &defs.SignedIn{Success: true, SessionId: id}
 	if resp, err := json.Marshal(si); err != nil {
 		sendErrorResponse(w, defs.ErrorInternalFaults)
 	} else {
@@ -146,13 +146,13 @@ func GetUserInfo(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	//首先校验用户
 	if !ValidateUser(w, r) {
 		log.Printf("GetUserInfo error: %v")
-		sendErrorResponse(w, defs.ErrorNotAuthUser)
+		//sendErrorResponse(w, defs.ErrorNotAuthUser)
 		return
 	}
-	uname := p.ByName("user_name") //ByName获取的是url/后接的名字，需要将它与db中的name进行对比
+	uname := p.ByName("username") //ByName获取的是url/后接的名字，需要将它与db中的name进行对比
 	u, err := dbops.GetUser(uname)
 	if err != nil {
-		log.Printf("GetUserCredential error: %v", err)
+		log.Printf("GetUserCredential error: %s", err)
 		return
 	}
 	ui := &defs.UserInfo{Id: u.Id}
@@ -172,7 +172,7 @@ func AddNewVideo(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	res, _ := ioutil.ReadAll(r.Body) //从request返回的应该是json字符串
 	newVideo := &defs.NewVideo{}     //用于存储res中的json字符串的解析
 	if err := json.Unmarshal(res, newVideo); err != nil {
-		log.Printf("Unmarshal error: %v", err)
+		log.Printf("Unmarshal error: %s", err)
 		sendErrorResponse(w, defs.ErrorInternalFaults)
 		return
 	}
@@ -185,17 +185,15 @@ func AddNewVideo(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	// }
 	log.Printf("Author id : %d, name: %s \n", newVideo.AuthorId, newVideo.Name)
 	if err != nil {
-		log.Printf("dbops AddNewVideo error: %v", err)
+		log.Printf("dbops AddNewVideo error: %s", err)
 		sendErrorResponse(w, defs.ErrorDBError)
 		return
 	}
 	if resp, err := json.Marshal(VI); err != nil {
-		log.Printf("json.Marshal error: %v", err)
+		log.Printf("json.Marshal error: %s", err)
 		sendErrorResponse(w, defs.ErrorInternalFaults)
-		return
 	} else {
 		sendNormalResponse(w, string(resp), 200)
-		return
 	}
 
 }
@@ -204,19 +202,18 @@ func ListAllVideos(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 	if !ValidateUser(w, r) {
 		return
 	}
-	uname := p.ByName("user_name")                                           //从request中得到User name
+	uname := p.ByName("username")                                            //从request中得到User name
 	vs, err := dbops.ListVideoInfo(uname, 0, utils.GetCurrentTimestampSec()) //GetCurrentTimestampSec() 获得当前时间
 	if err != nil {
-		log.Printf("ListVideoInfo error: %v", err)
+		log.Printf("ListVideoInfo error: %s", err)
 		sendErrorResponse(w, defs.ErrorDBError)
 		return
 	}
 	res := &defs.VideosInfo{Videos: vs}
 
 	if resp, err := json.Marshal(res); err != nil {
-		log.Printf("ListVideoInfo When Marshal error: %v", err)
+		log.Printf("ListVideoInfo When Marshal error: %s", err)
 		sendErrorResponse(w, defs.ErrorInternalFaults)
-		return
 	} else {
 		sendNormalResponse(w, string(resp), 200)
 	}
@@ -230,6 +227,7 @@ func DeleteVideo(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	vid := p.ByName("vid_id")
 	err := dbops.DeleteVideoInfo(vid)
 	if err != nil {
+		log.Printf("Error in DeletVideo: %s", err)
 		sendErrorResponse(w, defs.ErrorDBError)
 		return
 	} else {
