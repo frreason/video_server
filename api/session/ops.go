@@ -58,7 +58,7 @@ func IsSessionExpired(sid string) (string, bool) { //判断session是否过期
 		return ss.(*defs.SimpleSession).Username, false
 	} else {
 		ss, err := dbops.RetrieveSession(sid) //返回session对应的用户名及session
-		if err != nil {
+		if err != nil || ss == nil{
 			return "", true
 		}
 		if ss.TTL < ct { //过时

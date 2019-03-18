@@ -13,7 +13,7 @@ func vidDelRecHandler(w http.ResponseWriter, r *http.Request, p httprouter.Param
 		sendResponse(w, 400, "video should not be empty")
 		return
 	}
-	
+
 	err := dbops.AddVideoDeletionRecord(vid)
 	if err != nil {
 		sendResponse(w, 500, "Internal server error")

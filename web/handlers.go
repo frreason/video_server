@@ -22,7 +22,7 @@ type UserPage struct {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	cname, err1 := r.Cookie("user_name")
+	cname, err1 := r.Cookie("username")
 	sid, err2 := r.Cookie("session")
 
 	if err1 != nil || err2 != nil {
