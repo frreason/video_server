@@ -1,4 +1,4 @@
 {
-	"lb_addr": "127.0.0.1",
-	"oss_addr": "oss.aliyun.com"
+	"lb_addr": "10.140.134.81",
+	"oss_addr": "oss-cn-shenzhen-internal.aliyuncs.com"
 }
