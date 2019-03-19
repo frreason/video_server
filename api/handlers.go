@@ -114,7 +114,7 @@ func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	}
 
 	// Validate the request body
-	uname := p.ByName("username") //这一行是什么意思
+	uname := p.ByName("user_name") //这一行是什么意思
 	log.Printf("Login url name: %s", uname)
 
 	log.Printf("Login body name: %s", ubody.Username)
@@ -150,7 +150,7 @@ func GetUserInfo(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		//sendErrorResponse(w, defs.ErrorNotAuthUser)
 		return
 	}
-	uname := p.ByName("username") //ByName获取的是url/后接的名字，需要将它与db中的name进行对比
+	uname := p.ByName("user_name") //ByName获取的是url/后接的名字，需要将它与db中的name进行对比
 	u, err := dbops.GetUser(uname)
 	if err != nil {
 		log.Printf("GetUserCredential error: %s", err)
@@ -203,7 +203,7 @@ func ListAllVideos(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 	if !ValidateUser(w, r) {
 		return
 	}
-	uname := p.ByName("username")                                            //从request中得到User name
+	uname := p.ByName("user_name")                                           //从request中得到User name
 	vs, err := dbops.ListVideoInfo(uname, 0, utils.GetCurrentTimestampSec()) //GetCurrentTimestampSec() 获得当前时间
 	if err != nil {
 		log.Printf("ListVideoInfo error: %s", err)
