@@ -196,7 +196,7 @@ func ListVideoInfo(uname string, from, to int) ([]*defs.VideoInfo, error) {
 		return nil, err
 	}
 
-	rows, err := stmtOut.Query(uname)
+	rows, err := stmtOut.Query(uname, from, to)
 	if err != nil {
 		return nil, err
 	}
