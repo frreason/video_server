@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -29,6 +30,7 @@ func RegisterHandlers() *httprouter.Router {
 
 func (m middleWareHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if !m.l.GetConn() {
+		log.Println("GetConn error")
 		sendErrorResponse(w, http.StatusTooManyRequests, "Too many request!")
 		return
 	}
