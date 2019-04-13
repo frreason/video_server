@@ -19,7 +19,7 @@ type SignedUp struct {
 type VideoInfo struct {
 	Id           string `json:"id"`
 	AuthorId     int    `json:"author_id"`
-	Name         string `jsonn:"name"`
+	Name         string `json:"name"`
 	DisplayCtime string `json:"display_ctime"`
 }
 
