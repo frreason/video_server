@@ -3,35 +3,82 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(243, 243, 243);
 }
 
-.topnav {
-  overflow: hidden;
-  background-color: #333;
+#topnav {
+  /* overflow: hidden; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  z-index: 999;
+  border-bottom: 1px solid #e7e7e7;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+  
 }
 
-.topnav a {
+#topnav a {
   float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
   color: black;
+  text-align: center;
+  height: 50px;
+  padding: 0px 16px;
+  text-decoration: none;
+  font-size: 15px;
 }
 
-.topnav a.active {
-  background-color: #4CAF50;
+#topnav .topnav-icon1,
+#topnav .topnav-icon2,
+#topnav .topnav-icon3{
+  float: left;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  /* background-color: red */
+}
+
+#topnav .topnav-icon4{
+  width: 50px;
+  /* height: 100%; */
+  float: right;
+  display: inline-block;
+  margin-right: 20px;
+  padding: 0;
+}
+
+#topnav .topnav-icon1 img,
+#topnav .topnav-icon2 img,
+#topnav .topnav-icon3 img{
+  width: 20px;
+}
+
+#topnav .topnav-icon4 img{
+  width: 34px;
+}
+
+
+#topnav a.active {
+  background-color: rgb(97, 96, 96);
   color: white;
 }
 .topic-back {
+
+  width: 100%;
+  height: 130px;
+  line-height: 250px;
 	text-align: center;
 	/* background-color: #66ffff; */
   
@@ -44,14 +91,18 @@ body {
 	font-size: 60px;
 }
 
-* {
-    box-sizing: border-box;
-}
 
 /* Add padding to containers */
 .container {
-    padding: 16px;
-    background-color: white;
+  margin: 0 auto;
+  width: 500px;
+  height: 500px;
+  padding: 30px;
+  background-color: white;
+  border: 1.5px solid rgb(153, 149, 149);
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.2); 
+  border-radius: 8px;
+
 }
 
 /* Full-width input fields */
@@ -62,6 +113,7 @@ input[type=text], input[type=password] {
     display: inline-block;
     border: none;
     background: #f1f1f1;
+    border-radius: 8px;
 }
 
 input[type=text]:focus, input[type=password]:focus {
@@ -72,7 +124,7 @@ input[type=text]:focus, input[type=password]:focus {
 /* Overwrite default styles of hr */
 hr {
     border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 /* Set a style for the submit button */
@@ -82,6 +134,7 @@ hr {
     padding: 16px 20px;
     margin: 8px 0;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     width: 100%;
     opacity: 0.9;
@@ -95,12 +148,25 @@ hr {
 /* Add a blue text color to links */
 a {
     color: dodgerblue;
+    text-decoration: none;
+    line-height: 55px;
+}
+
+#topnav .topnav-icon1 a:hover,
+#topnav .topnav-icon2 a:hover,
+#topnav .topnav-icon3 a:hover{
+  background-color: rgb(97, 96, 96);
+  color: black;
 }
 
 /* Set a grey background color and center the text of the "sign in" section */
 .signin {
-    background-color: #f1f1f1;
+    width: 100%;
+    height: 50px;
+    background-color: #e6e6e6;
     text-align: center;
+    border: none;
+    border-radius: 5px;
 }
 </style>
 <script
@@ -112,59 +178,82 @@ a {
 </head>
 <body id="main-back">
 
-<div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="#news">{{.Name}}</a>
-  <a href="#about">Help</a>
+<div id="topnav">
+  <div class="topnav-icon1">
+    <a class="active" href="#home">
+      <img src="../template/img/home.svg" alt="">
+      主页
+    </a>
+  </div>
+  <div class="topnav-icon2">
+    <a href="#news">
+      <img src="../template/img/name.svg" alt="">
+      {{.Name}}
+    </a>
+  </div>
+  <div class="topnav-icon3">
+    <a href="#about">
+      <img src="../template/img/help.svg" alt="">
+      帮助
+    </a>
+  </div>
+  <div class="topnav-icon4">
+    <a href="#" style="line-height:65px;">
+      <img src="../template/img/movie.svg" alt="" style="width:30px; ">
+    </a>
+  </div>
 </div>
 
-<div class="topic-back" style="padding-left:16px">
-  <h2 id="title">Welcome to MOVIEDASH</h2>
+<div class="topic-back">
+  <!-- <h2 id="title">欢迎来到我的网站</h2> -->
 </div>
 
-<form method="post" id="regsubmit" action="/userhome" style="width: 500px; margin: 0 auto;">
+<form method="post" id="regsubmit" action="/userhome" style="width: 500px; margin: 0 auto; display: none;">
   <div class="container">
-    <h1>Register</h1>
+    <h1>注册</h1>
     <hr>
 
-    <label for="email"><b>User name</b></label>
-    <input id="username" type="text" placeholder="Enter user name" name="username" required>
+    <label for="email"><b>用户名</b></label>
+    <input id="username" type="text" placeholder="输入用户名" name="username" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input id="pwd" type="password" placeholder="Enter Password" name="pwd" required>
+    <label for="psw"><b>密码</b></label>
+    <input id="pwd" type="password" placeholder="输入密码" name="pwd" required>
 
     <hr>
-    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+    <p>在注册之前先阅读该网站的 <a href="#">条款 & 条例</a>.</p>
 
-    <button id="regbtn" type="submit" class="registerbtn" >Register</button>
+    <button id="regbtn" type="submit" class="registerbtn" >提交</button>
+    <div class="signin">
+      <p>已经有一个账号了？点击此处 <a id="signinhref" href="#">登陆</a>.</p>
+    </div>
   </div>
   
-  <div class="container signin">
-    <p>Already have an account? <a id="signinhref" href="#">Sign in</a>.</p>
-  </div>
+
 </form>
 
-<form method="post" id="siginsubmit" action="/userhome" style="width: 500px; margin: 0 auto; display: none;">
+
+<form method="post" id="siginsubmit" action="/userhome" style="width: 500px; margin: 0 auto; ">
   <div class="container">
-    <h1>Sign In</h1>
+    <h1>登陆</h1>
     <hr>
 
-    <label for="email"><b>User name</b></label>
-    <input id="susername" type="text" placeholder="Enter user name" name="username" required>
+    <label for="email"><b>用户名</b></label>
+    <input id="susername" type="text" placeholder="输入用户名" name="username" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input id="spwd" type="password" placeholder="Enter Password" name="pwd" required>
+    <label for="psw"><b>密码</b></label>
+    <input id="spwd" type="password" placeholder="输入密码" name="pwd" required>
 
     <hr>
-    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+    <p>在注册之前先阅读该网站的 <a href="#">条款 & 条例</a>.</p>
 
-    <button id="siginbtn" type="submit" class="registerbtn" >Sign In</button>
+    <button id="siginbtn" type="submit" class="registerbtn" >提交</button>
+    <div class="signin">
+      <p>还没有一个账号？点击此处 <a id="registerhref" href="#">注册</a>.</p>
+    </div>
   </div>
   
-  <div class="container signin">
-    <p>Don't have an account? <a id="registerhref" href="#">Register</a>.</p>
-  </div>
 </form>
+
 
 </body>
 </html>

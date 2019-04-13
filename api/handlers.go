@@ -157,7 +157,7 @@ func GetUserInfo(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		return
 	}
 	ui := &defs.UserInfo{Id: u.Id}
-	if resp, err := json.Marshal(ui); err != nil {
+	if resp, err := json.Marshal(ui); err != nil { //只发送回user的Id？
 		sendErrorResponse(w, defs.ErrorInternalFaults)
 		return
 	} else {

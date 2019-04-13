@@ -16,7 +16,7 @@ var httpClient *http.Client
 func init() {
 	httpClient = &http.Client{}
 }
-
+//将各种http请求分发到各个真正得端口得api
 func request(b *ApiBody, w http.ResponseWriter, r *http.Request) {
 	var resp *http.Response
 	var err error

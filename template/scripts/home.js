@@ -8,10 +8,10 @@ $(document).ready(function() {
 	currentVideo = null;
 	listedVideos = null;
 
-	session = getCookie('session');
-	uname = getCookie('username');
+	session = getCookie('session');  //从cookie中读取session
+	uname = getCookie('username');   //从cookie中读取username
 
-	initPage(function() {
+	initPage(function() {    //执行初始化函数
 		if (listedVideos !== null) {
 			currentVideo = listedVideos[0];
 			selectVideo(listedVideos[0]['id']);
@@ -180,9 +180,11 @@ $(document).ready(function() {
 });
 
 function initPage(callback) {
-	getUserId(function(res, err) {
+	getUserId(function(res, err) {  //有bug
 		if (err != null) {
+			window.alert("err");
 			window.alert("Encountered error when loading user id");
+
 			return;
 		}
 
@@ -214,7 +216,7 @@ function setCookie(cname, cvalue, exmin) {
 }
 
 function getCookie(cname) {
-    var name = cname + "=";
+    var name = cname + "=";   //cname  sessionId or username
     var ca = document.cookie.split(';');
     for(var i = 0; i < ca.length; i++) {
         var c = ca[i];
@@ -447,8 +449,9 @@ function signinUser(callback) {
 
 function getUserId(callback) {
 	var dat = {
-		'url': 'http://' + window.location.hostname + ':8000/user/' + uname,
-		'method': 'GET'
+		'url': 'http://' + window.location.hostname + ':8000/user/' + uname,  //uname在上面已通过cookie获取
+		'method': 'GET',
+		'req_body': ''
 	};
 
 	$.ajax({
@@ -458,11 +461,13 @@ function getUserId(callback) {
 		headers: {'X-Session-Id': session},
 		statusCode: {
 			500: function() {
+				window.alert('500 Internal Error');
 				callback(null, "Internal Error");
 			}
 		},
 		complete: function(xhr, textStatus) {
-			if (xhr.status >= 400) {
+			if (xhr.status >= 400) {  //执行了这个回调函数
+				window.alert('>=400 Error of getUserId');
 				callback(null, "Error of getUserId");
 				return;
 			}
