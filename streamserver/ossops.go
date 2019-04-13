@@ -28,6 +28,7 @@ func UploadToOss(fileName string, path string, bn string) bool {
 		log.Printf("Getting bucket error: %s", err)
 		return false
 	}
+
 	err = bucket.UploadFile(fileName, path, 500*1024, oss.Routines(3))
 	if err != nil {
 		log.Printf("UploadFile error: %s", err)
