@@ -182,7 +182,7 @@ $(document).ready(function() {
 function initPage(callback) {
 	getUserId(function(res, err) {  //有bug
 		if (err != null) {
-			window.alert("err");
+			console.log(err);
 			window.alert("Encountered error when loading user id");
 
 			return;
@@ -200,6 +200,7 @@ function initPage(callback) {
 			var obj = JSON.parse(res);
 			listedVideos = obj['videos'];
 			obj['videos'].forEach(function(item, index) {
+				console.log(item['id'], item['name'], item['display_ctime']);
 				var ele = htmlVideoListElement(item['id'], item['name'], item['display_ctime']);
 				$("#items").append(ele);
 			});
