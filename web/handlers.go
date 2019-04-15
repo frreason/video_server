@@ -101,7 +101,7 @@ func videosHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 }
 
 //新增加的接口
-func myHelpHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func aboutHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	cname, _ := r.Cookie("username")
 

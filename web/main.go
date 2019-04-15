@@ -15,7 +15,7 @@ func RegisterHandler() *httprouter.Router {
 	router.GET("/userhome", userHomeHandler)
 	router.POST("/userhome", userHomeHandler)
 	router.GET("/videos", videosHandler)
-	router.GET("/help", myHelpHandler)
+	router.GET("/about", aboutHandler)
 	router.POST("/api", apiHandler)
 	router.POST("/upload/:vid-id", proxyUploadHandler)
 	router.GET("/videos/:vid-id", proxyVideoHandler)
