@@ -37,9 +37,20 @@ func homeHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 	//验证有无登陆过
 	if len(cname.Value) != 0 && len(sid.Value) != 0 {
-		http.Redirect(w, r, "/userhome", http.StatusFound)
+		http.Redirect(w, r, "/userhome", http.StatusFound) //重定向！！！
 		return
 	}
+}
+
+func helpHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+
+	p := &HomePage{Name: "mzj"}
+	t, e := template.ParseFiles("./template/help.html")
+	if e != nil {
+		log.Printf("Parsing help.html error: %s", e)
+		return
+	}
+	t.Execute(w, p)
 }
 
 func userHomeHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -65,6 +76,48 @@ func userHomeHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Param
 	}
 	t.Execute(w, p)
 
+}
+
+//新添加的接口
+func videosHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	cname, err1 := r.Cookie("username")
+	_, err2 := r.Cookie("session")
+
+	if err1 != nil || err2 != nil {
+		http.Redirect(w, r, "/", http.StatusFound)
+		return
+	}
+	var p *UserPage
+
+	if len(cname.Value) != 0 {
+		p = &UserPage{Name: cname.Value}
+	}
+	t, err := template.ParseFiles("./template/videos.html")
+	if err != nil {
+		log.Printf("Parsing allvideos.html error: %s", err)
+		return
+	}
+	t.Execute(w, p)
+}
+
+//新增加的接口
+func myHelpHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+
+	cname, _ := r.Cookie("username")
+
+	var p *UserPage
+	if len(cname.Value) != 0 {
+		p = &UserPage{Name: cname.Value}
+	} else {
+		p = &UserPage{Name: "mzj"}
+	}
+
+	t, err := template.ParseFiles("./template/help.html")
+	if err != nil {
+		log.Printf("Parsing allvideos.html error: %s", err)
+		return
+	}
+	t.Execute(w, p)
 }
 
 func apiHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {

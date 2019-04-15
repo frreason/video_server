@@ -29,6 +29,14 @@ $(document).ready(function() {
   			selectVideo(self);
 		});
 
+		// //显示全部视频
+		// $("#all-videos").click(function(e){
+		// 	e.preventDefault();  //防止默认行为
+		// 	//发送一个ajax请求
+		// 	this.href = 'http://47.106.252.71:8080/videos';
+		// })
+
+
 		$(".del-video-button").click(function() {
 			var id = this.id.substring(4);
   			deleteVideo(id, function(res, err) {
@@ -117,7 +125,7 @@ $(document).ready(function() {
 	
 	$("#uploadform").on('submit', function(e) {
 		e.preventDefault()
-	  	var vname = $('#vname').val();
+	  var vname = $('#vname').val();
 
 	  	createVideo(vname, function(res, err) {
 	  		if (err != null ) {
@@ -171,13 +179,15 @@ $(document).ready(function() {
 	});
 
 
-    $(".video-item").click(function () {
-  	    var url = 'http://' + window.location.hostname + ':9000/videos/'+ this.id
-  	    var video = $("#curr-video");
-  	    video[0].attr('src', url);
-  	    video.load();
-    });
+	$(".video-item").click(function () {
+			var url = 'http://' + window.location.hostname + ':9000/videos/'+ this.id
+			var video = $("#curr-video");
+			video[0].attr('src', url);
+			video.load();
+	});
+
 });
+
 
 function initPage(callback) {
 	getUserId(function(res, err) {  //有bug
@@ -234,12 +244,12 @@ function getCookie(cname) {
 // DOM operations
 function selectVideo(vid) {
 	var url = 'http://' + window.location.hostname + ':8080/videos/'+ vid
-  	var video = $("#curr-video");
-  	$("#curr-video:first-child").attr('src', url);
-  	$("#curr-video-name").text(currentVideo['name']);
-  	$("#curr-video-ctime").text('Uploaded at: ' + currentVideo['display_ctime']);
-  	//currentVideoId = vid;
-  	refreshComments(vid);
+	var video = $("#curr-video");
+	$("#curr-video:first-child").attr('src', url);
+	$("#curr-video-name").text(currentVideo['name']);
+	$("#curr-video-ctime").text('Uploaded at: ' + currentVideo['display_ctime']);
+	//currentVideoId = vid;
+	refreshComments(vid);
 }
 
 function refreshComments(vid) {
@@ -298,8 +308,8 @@ function htmlCommentListElement(cid, author, content) {
 	);
 	
 	ele.append('<hr style="height: 1px; border:none; color:#EDE3E1;background-color:#EDE3E1">');
-    
-    return ele;
+  
+  return ele;
 }
 
 function htmlVideoListElement(vid, name, ctime) {

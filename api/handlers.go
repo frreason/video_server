@@ -218,6 +218,12 @@ func ListAllVideos(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 	} else {
 		sendNormalResponse(w, string(resp), 200)
 	}
+}
+
+func ListEveryVideos(w http.ResponseWriter, r *http.Request, p httprouter.Params){
+
+	
+
 
 }
 

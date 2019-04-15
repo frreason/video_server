@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="statics/scripts/home1.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(243, 243, 243);
+        }
+        div{
+            color: #636363;
+        }
+
+        #topnav {
+        /* overflow: hidden; */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: white;
+            z-index: 999;
+            border-bottom: 1px solid #e7e7e7;
+            box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+
+        }
+
+        #topnav a {
+            float: left;
+            color: black;
+            text-align: center;
+            height: 50px;
+            padding: 0px 16px;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        #topnav .topnav-icon1,
+        #topnav .topnav-icon2,
+        #topnav .topnav-icon3,
+        #topnav .topnav-icon5,
+        #topnav .topnav-icon6,
+        #topnav .topnav-icon7{
+            float: left;
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            /* background-color: red */
+        }
+
+        #topnav .topnav-icon4{
+            width: 50px;
+            /* height: 100%; */
+            float: right;
+            display: inline-block;
+            margin-right: 20px;
+            padding: 0;
+        }
+
+        #topnav .topnav-icon1 img,
+        #topnav .topnav-icon2 img,
+        #topnav .topnav-icon3 img,
+        #topnav .topnav-icon7 img{
+            width: 20px;
+        }
+
+        #topnav .topnav-icon4 img{
+            width: 34px;
+        }
+
+
+        #topnav a.active {
+            background-color: rgb(97, 96, 96);
+            color: white;
+        }
+        a {
+        color: dodgerblue;
+            text-decoration: none;
+            line-height: 55px;
+        }
+
+        #topnav .topnav-icon1 a:hover,
+        #topnav .topnav-icon2 a:hover,
+        #topnav .topnav-icon3 a:hover,
+        #topnav .topnav-icon5 a:hover,
+        #topnav .topnav-icon6 a:hover,
+        #topnav .topnav-icon7 a:hover{
+            background-color: rgb(97, 96, 96);
+            color: black;
+        }
+
+        #whole{
+            padding-left: 250px;
+            padding-right: 250px;
+            margin-top: 80px;
+            width: 100%;
+            /* background-color: red; */
+        }
+
+        #whole .video-item{
+            /* text-align: center; */
+            padding-top: 25px;
+            padding-bottom: 25px;
+            padding-left: 15px;
+            padding-right: 15px;
+            float: left;
+            width: 315px;
+            height: 240px;
+            margin-top: 30px;
+            margin-left: 20px;
+            border: 1px solid #c4c4c4;
+            text-align: center;
+        }
+
+        #whole .video-item:hover{
+            box-shadow: 0px 0px 5px 0px #233833;
+        }
+
+        #whole .video-item img{
+            width: 90%;
+            margin-bottom: 0px;
+            /* align: center; */
+        }
+        video{
+            width: 100%;
+            height: 200px;
+        }
+        .displayCtime,
+        .displayName{
+            padding-left: 10px;
+            text-align: left;
+            line-height: 18px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="topnav">
+        <div class="topnav-icon1">
+            <a href="#">
+                <img src="../template/img/home.svg" alt="">
+                主页
+            </a>
+        </div>
+        <div class="topnav-icon2">
+            <a href="http://47.106.252.71:8080/userhome" id="mySelf">
+                <img src="../template/img/name.svg" alt="">
+                {{.Name}}
+            </a>
+        </div>
+        <div class="topnav-icon7">
+            <a href="#" id="all-videos" class="active"> 
+                <img src="../template/img/all.svg" alt="">
+                全部视频
+            </a>
+        </div>
+        <div class="topnav-icon3">
+            <a href="#about">
+                <img src="../template/img/help.svg" alt="">
+                帮助
+            </a>
+        </div>
+
+        <div class="topnav-icon4">
+            <a href="#" style="line-height:65px;">
+                <img src="../template/img/movie.svg" alt="" style="width:30px; ">
+            </a>
+        </div>
+    </div>
+    <div id="whole">
+    
+    </div>
+
+</body>
+</html>

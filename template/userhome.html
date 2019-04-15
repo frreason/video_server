@@ -2,38 +2,97 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(243, 243, 243);
 }
 
-.topnav {
-  overflow: hidden;
-  background-color: #333;
+#topnav {
+  /* overflow: hidden; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  z-index: 999;
+  border-bottom: 1px solid #e7e7e7;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+
 }
 
-.topnav a {
+#topnav a {
   float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
   color: black;
+  text-align: center;
+  text-decoration: none;
+  line-height: 58px;
+  height: 50px;
+  padding: 0px 16px;
+  text-decoration: none;
+  font-size: 15px;
 }
 
-.topnav a.active {
-  background-color: #4CAF50;
+#topnav .topnav-icon1,
+#topnav .topnav-icon2,
+#topnav .topnav-icon3{
+  float: left;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  /* background-color: red */
+}
+
+#topnav .topnav-icon4{
+  width: 50px;
+  /* height: 100%; */
+  float: right;
+  display: inline-block;
+  margin-right: 20px;
+  padding: 0;
+}
+
+#topnav .topnav-icon1 img,
+#topnav .topnav-icon2 img,
+#topnav .topnav-icon3 img,
+#topnav .topnav-icon7 img,
+#topnav .topnav-icon5 img,
+#topnav .topnav-icon6 img{
+  width: 20px;
+}
+
+#topnav .topnav-icon4 img{
+  width: 34px;
+}
+
+#topnav .topnav-icon1 a:hover,
+#topnav .topnav-icon2 a:hover,
+#topnav .topnav-icon3 a:hover,
+#topnav .topnav-icon5 a:hover,
+#topnav .topnav-icon6 a:hover,
+#topnav .topnav-icon7 a:hover{
+background-color: rgb(97, 96, 96);
+color: black;
+}
+
+
+#topnav a.active {
+  background-color: rgb(97, 96, 96);
   color: white;
 }
 .topic-back {
-	text-align: center;
+	width: 100%;
+  height: 100px;
 	background-color: #F1F1F1;
 }
 #main-back {
@@ -43,9 +102,6 @@ body {
 	font-size: 60px;
 }
 
-* {
-    box-sizing: border-box;
-}
 
 /* Add padding to containers */
 .container {
@@ -69,9 +125,14 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 /* Overwrite default styles of hr */
-hr {
-    border: 1px solid #f1f1f1;
+#comments .spe {
+    background-color: #e1e1e1;
     margin-bottom: 25px;
+    margin-top: 30px;
+}
+hr{
+  margin-top: 8px;
+  /* width: 1px; */
 }
 
 /* Set a style for the submit button */
@@ -92,9 +153,7 @@ hr {
 }
 
 /* Add a blue text color to links */
-a {
-    color: dodgerblue;
-}
+
 
 /* Set a grey background color and center the text of the "sign in" section */
 .signin {
@@ -144,12 +203,38 @@ a {
 .video-thumbnail-list {
   padding-left: 50px;
 }
+.video-item{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.video-item:hover{
+  box-shadow: 0px 0px 5px 0px #AD9E87;
+}
+.video-item .del-video-button{
+  margin-top: 3px;
+  width: 50px;
+  height: 25px;
+  border-radius: 5px;
+}
+
+
 .whole {
   padding-left: 100px;
   display: flex;
 }
+
+#curr-video-name{
+  padding-top: 5px;
+}
+#curr-video-ctime{
+  padding-top: 1px;
+}
+
 #comments {
-  padding-top: 20px;
+  padding-top: 10px;
 }
 .comment-author {
   font-size: 12px;
@@ -168,6 +253,29 @@ a {
   color: black;
   line-height: 3;
 }
+#comments-input{
+  padding-left: 7px;
+  padding-top: 2px;
+  font-size: 16px;
+  width: 640px;
+  outline: none;
+  border-radius: 5px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+.clearfix::before,
+.clearfix::after{
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+#submit-comment{
+  width: 50px;
+  height: 25px;
+  float: right;
+}
+
 #curr-video-name {
   font-size: 18px;
   padding-top: 10px;
@@ -226,45 +334,83 @@ a {
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous">
 </script>
-<script type="text/javascript" src="statics/scripts/home.js"></script> ///
+<!-- <script type="text/javascript" src="statics/scripts/home.js"></script> -->
+<script type="text/javascript" src="/statics/scripts/home.js"></script>
 </head>
 <body id="main-back">
 
-<div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="#news">{{.Name}}</a>
-  <a href="#about">About</a>
-  <a href="#" id="upload" data-rel="popup">Upload</a>
-  <a href="" id="logout" href="/">Logout</a>
-</div>
+<div id="topnav">
+  <div class="topnav-icon1">
+    <a class="active" href="#home">
+      <img src="/statics/img/home.svg" alt="">
+      主页
+    </a>
+  </div>
+  <div class="topnav-icon2">
+    <a href="#news">
+      <img src="/statics/img/name.svg" alt="">
+      {{.Name}}
+    </a>
+  </div>
+  <div class="topnav-icon7">
+    <a href="http://47.106.252.71:8080/videos" id="all-videos">
+      <img src="/statics/img/all.svg" alt="">
+      全部视频
+    </a>
+  </div>
+  <div class="topnav-icon3">
+    <a href="http://47.106.252.71:8080/help">
+      <img src="/statics/img/help.svg" alt="">
+      帮助
+    </a>
+  </div>
+  <div class="topnav-icon5">
+    <a href="#" id="upload" data-rel="popup">
+      <img src="/statics/img/cloud upload-fill.svg" alt="">
+      上传视频
+    </a>
+  </div>
+  <div class="topnav-icon6">
+    <a href="" id="logout">
+      <img src="/statics/img/log-out.svg" alt="">
+      退出登陆
+    </a>
+  </div>
 
-<div class="topic-back" style="padding-left:16px">
-  <h2 id="title">Welcome to MOVIEDASH</h2>
-</div>
-
-<div class="whole">
-<div id="play-box">
-<video id="curr-video" width="640" height="400"  controls preload="auto" border="5">
-</video>
-<div id="curr-video-name"></div>
-<div id="curr-video-ctime"></div>
-
-<div id="snackbar">Comment submission succeeded</div>
-<div id="errorbar">Error happened</div>
-
-  <div id="comments">
-      <textarea id="comments-input" name="message" rows="5" cols="90" placeholder="Input your comment"></textarea>
-      <input id="submit-comment" type="submit">
-      <hr size="1" style="border-color: #EDE3E1;">
-      <div id="comments-total">0 Comments</div>
-      <div id="comments-history">
-      </div>
+  <div class="topnav-icon4">
+    <a href="#" style="line-height:65px;">
+      <img src="/statics/img/movie.svg" alt="" style="width:30px; ">
+    </a>
   </div>
 </div>
 
-<div id="items" class="video-thumbnail-list">
+<div class="topic-back" style="padding-left:16px"></div>
+
+<div class="whole">
+  <div id="play-box">
+    <video id="curr-video" width="640" height="400"  controls preload="auto" border="5">
+    </video>
+    <div id="curr-video-name"></div>
+    <div id="curr-video-ctime"></div>
+
+    <div id="snackbar">Comment submission succeeded</div>
+
+    <div id="errorbar">Error happened</div>
+
+    <div id="comments">
+        <textarea id="comments-input" name="message" rows="3" cols="90" placeholder="Input your comment"></textarea>
+        <br>
+        <input id="submit-comment" type="submit" class="clearfix">
+        <hr size="1" style="border-color: #EDE3E1;" class="spe">
+        <div id="comments-total">0 Comments</div>
+        <div id="comments-history"></div>
+    </div>
+  </div>
+
+  <div id="items" class="video-thumbnail-list">
+  </div>
 </div>
-</div>
+
 <div id="uploadvideomodal" class="modal">
 
   <!-- Modal content -->
