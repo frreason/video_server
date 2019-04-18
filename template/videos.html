@@ -38,6 +38,9 @@
         }
 
         #topnav a {
+            display: block;
+            text-align: center;
+            vertical-align:middle;
             float: left;
             color: black;
             text-align: center;
@@ -86,7 +89,7 @@
             color: white;
         }
         a {
-        color: dodgerblue;
+            color: dodgerblue;
             text-decoration: none;
             line-height: 55px;
         }
@@ -150,32 +153,32 @@
     <div id="topnav">
         <div class="topnav-icon1">
             <a href="#">
-                <img src="../template/img/home.svg" alt="">
-                主页
+                <img src="/statics/img/home.svg" alt="">
+                <span>主页</span> 
             </a>
         </div>
         <div class="topnav-icon2">
             <a href="http://47.106.252.71:8080/userhome" id="mySelf">
-                <img src="../template/img/name.svg" alt="">
+                <img src="/statics/img/name.svg" alt="">
                 {{.Name}}
             </a>
         </div>
         <div class="topnav-icon7">
             <a href="#" id="all-videos" class="active"> 
-                <img src="../template/img/all.svg" alt="">
+                <img src="/statics/img/all.svg" alt="">
                 全部视频
             </a>
         </div>
         <div class="topnav-icon3">
             <a href="#about">
-                <img src="../template/img/help.svg" alt="">
+                <img src="/statics/img/help.svg" alt="">
                 帮助
             </a>
         </div>
 
         <div class="topnav-icon4">
             <a href="#" style="line-height:65px;">
-                <img src="../template/img/movie.svg" alt="" style="width:30px; ">
+                <img src="/statics/img/movie.svg" alt="" style="width:30px; ">
             </a>
         </div>
     </div>
